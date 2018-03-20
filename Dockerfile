@@ -13,8 +13,13 @@ RUN wget -nv https://github.com/gophish/gophish/releases/download/v0.5.0/gophish
 unzip gophish-v0.5.0-linux-64bit.zip && \
 rm -f gophish-v0.5.0-linux-64bit.zip
 
+RUN mkdir /app && cp -R /opt/gophish-v0.5.0-linux-64bit/* /app/ && rm -rf /opt/gophish-v0.5.0-linux-64bit
+WORKDIR /app
+
 RUN sed -i "s|127.0.0.1|0.0.0.0|g" config.json && \
 chmod +x gophish
 
+VOLUME ["/app/database"]
+VOLUME ["/app/static"]
 EXPOSE 3333 80
 ENTRYPOINT ["./gophish"]
