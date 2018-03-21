@@ -19,7 +19,6 @@ WORKDIR /app
 RUN sed -i "s|127.0.0.1|0.0.0.0|g" config.json && \
 chmod +x gophish
 
-VOLUME ["/app/database"]
-VOLUME ["/app/static"]
+VOLUME ["/app"]
 EXPOSE 3333 80
 ENTRYPOINT ["./gophish"]
